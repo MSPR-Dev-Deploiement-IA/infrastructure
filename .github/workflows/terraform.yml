@@ -76,10 +76,9 @@ jobs:
         run: |
           curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-      - name: Download config.json from Azure Storage
+      - name: Copy config
         run: |
-          az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }}
-          az storage blob download --account-name msprarosaje --account-key ${{ secrets.AZURE_STORAGE_ACCESS_KEY }} --name config.json --container-name config --file ./config.json
+          cp ../config.json ./config.json
 
       - name: "Terraform Setup"
         uses: hashicorp/setup-terraform@v1
