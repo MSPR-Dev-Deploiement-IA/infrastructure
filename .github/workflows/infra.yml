@@ -36,7 +36,7 @@ jobs:
         terraform_version: ${{ env.TF_VERSION }}
 
     - name: 'Terraform Init'
-      run: terraform init ${{ env.TF_INIT_OPTIONS }}
+      run: terraform init -backend-config="access_key=${{ secrets.AZURE_STORAGE_ACCOUNT_ACCESS_KEY }}"
       env:
         TF_CLI_CONFIG_FILE: ${{ github.workspace }}/terraform.rc
 
