@@ -1,8 +1,8 @@
-name: 'Terraform GitHub Actions'
+name: "Terraform GitHub Actions"
 on:
   push:
     branches:
-    - main
+      - main
   pull_request:
 
 env:
@@ -18,34 +18,46 @@ env:
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
-
   terraform:
     defaults:
       run:
         working-directory: ${{ env.TF_WORKING_DIR }}
 
-    name: 'Terraform'
+    name: "Terraform"
     runs-on: ubuntu-latest
     steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v2
+      - name: "Checkout"
+        uses: actions/checkout@v2
 
-    - name: 'Terraform Setup'
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: ${{ env.TF_VERSION }}
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-    - name: 'Terraform Init'
-      run: terraform init -backend-config="access_key=tjczAlXO7w1k+4pmNXvP6d1zMYsBQPssnKDQpuXqBor6wDBIXd1UAvwKz/Z4gEKwjyNhTp13NHfU+ASt24HUMQ=="
-      env:
-        TF_CLI_CONFIG_FILE: ${{ github.workspace }}/terraform.rc
+      - name: "Terraform Setup"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
 
-    - name: 'Terraform Validate'
-      run: terraform validate ${{ env.TF_VALIDATE_OPTIONS }}
+      - name: "Terraform Init"
+        run: terraform init -backend-config="access_key=tjczAlXO7w1k+4pmNXvP6d1zMYsBQPssnKDQpuXqBor6wDBIXd1UAvwKz/Z4gEKwjyNhTp13NHfU+ASt24HUMQ=="
+        env:
+          TF_CLI_CONFIG_FILE: ${{ github.workspace }}/terraform.rc
 
-    - name: 'Terraform Plan'
-      run: terraform plan ${{ env.TF_PLAN_OPTIONS }}
+      - name: "Terraform Validate"
+        run: terraform validate ${{ env.TF_VALIDATE_OPTIONS }}
 
-    - name: 'Terraform Apply'
-      run: terraform apply ${{ env.TF_APPLY_OPTIONS }}
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      - name: "Terraform Plan"
+        run: terraform plan ${{ env.TF_PLAN_OPTIONS }}
+
+      - name: "Terraform Apply"
+        run: terraform apply ${{ env.TF_APPLY_OPTIONS }}
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+      - name: "Terraform Output"
+        run: terraform output -json > config.json
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push
+
+      - name: Upload output to Azure Storage
+        run: |
+          az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }}
+          az storage blob upload --account-name msprarosaje --account-key ${{ secrets.AZURE_STORAGE_ACCESS_KEY }} --name config.json --type block --file ./config.json --container-name config
