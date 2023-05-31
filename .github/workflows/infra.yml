@@ -10,6 +10,7 @@ env:
   TF_INIT_OPTIONS: -backend-config="access_key=$"
   TF_VALIDATE_OPTIONS: -no-color
   TF_PLAN_OPTIONS: -no-color
+  TF_WORKING_DIR: infra
   TF_APPLY_OPTIONS: -auto-approve -no-color
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -17,7 +18,12 @@ env:
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
 
 jobs:
+
   terraform:
+    defaults:
+      run:
+        working-directory: ${{ env.TF_WORKING_DIR }}
+
     name: 'Terraform'
     runs-on: ubuntu-latest
     steps:
