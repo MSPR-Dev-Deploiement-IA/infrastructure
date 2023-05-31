@@ -32,4 +32,5 @@ module "aks" {
   log_analytics_workspace_id = module.logs.log_workspace_id
   rbac_enabled               = true
   acr_id                     = module.acr.acr_id
+  rg_id                      = azurerm_resource_group.rg.id
 }

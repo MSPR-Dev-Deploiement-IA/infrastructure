@@ -42,3 +42,8 @@ variable "acr_id" {
   description = "The id of the Azure Container Registry"
   type        = string
 }
+
+variable "rg_id" {
+  description = "The id of the Resource Group in which the AKS cluster should be created"
+  type        = string
+}

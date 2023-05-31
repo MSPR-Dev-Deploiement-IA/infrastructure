@@ -35,3 +35,23 @@ output "cluster_ca_certificate" {
   value     = module.aks.cluster_ca_certificate
   sensitive = true
 }
+
+output "acr_id" {
+  value     = module.acr.acr_id
+  sensitive = true
+}
+
+output "acr_login_server" {
+  value     = module.acr.acr_login_server
+  sensitive = true
+}
+
+output "acr_admin_username" {
+  value     = module.acr.acr_admin_username
+  sensitive = true
+}
+
+output "acr_admin_password" {
+  value     = module.acr.acr_admin_password
+  sensitive = true
+}

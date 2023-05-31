@@ -10,8 +10,8 @@ module "helm" {
   dns_prefix = local.dns_prefix
 }
 
-module "acr" {
-  source = "./modules/acr"
+module "acr_images" {
+  source = "./modules/acr_images"
 
   images = [
     {
@@ -20,9 +20,16 @@ module "acr" {
     },
     {
       name = "backend"
-      path  = "https://github.com/MSPR-Dev-Deploiement-IA/backend.git#main"
+      path = "https://github.com/MSPR-Dev-Deploiement-IA/backend.git#main"
     }
   ]
   acr_id              = local.infra_outputs.acr_id.value
   github_access_token = var.github_access_token
+}
+
+
+module "kube" {
+  source = "./modules/kube"
+
+  fqdn = local.fqdn
 }
