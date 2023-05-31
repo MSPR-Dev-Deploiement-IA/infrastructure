@@ -55,7 +55,7 @@ jobs:
 
       - name: "Terraform Output"
         run: terraform output -json > config.json
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - name: Upload output to Azure Storage
         run: |
