@@ -18,7 +18,7 @@ terraform {
     resource_group_name  = "terraform_backends"
     storage_account_name = "msprarosaje"
     container_name       = "tfstate"
-    key                  = "infra.terraform.tfstate"
+    key                  = "app.terraform.tfstate"
   }
 }
 

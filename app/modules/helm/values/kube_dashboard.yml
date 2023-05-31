@@ -1,0 +1,9 @@
+service:
+  type: LoadBalancer
+  externalPort: 80
+
+protocolHttp: true
+replicaCount: 2
+rbac:
+  clusterReadOnlyRole: true
+  clusterAdminRole: false
