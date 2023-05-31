@@ -40,12 +40,9 @@ jobs:
         run: terraform init -backend-config="access_key=tjczAlXO7w1k+4pmNXvP6d1zMYsBQPssnKDQpuXqBor6wDBIXd1UAvwKz/Z4gEKwjyNhTp13NHfU+ASt24HUMQ=="
         env:
           TF_CLI_CONFIG_FILE: ${{ github.workspace }}/terraform.rc
-
+      
       - name: "Terraform Validate"
         run: terraform validate
-
-      - name: "Terraform Plan"
-        run: terraform plan
 
       - name: "Terraform Apply"
         run: terraform apply ${{ env.TF_APPLY_OPTIONS }}
@@ -92,9 +89,6 @@ jobs:
 
       - name: "Terraform Validate"
         run: terraform validate
-
-      - name: "Terraform Plan"
-        run: terraform plan
 
       - name: "Terraform Apply"
         run: terraform apply ${{ env.TF_APPLY_OPTIONS }}
