@@ -9,11 +9,11 @@ on:
 env:
   TF_VERSION: 1.4.6
   TF_APPLY_OPTIONS: -auto-approve
-  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  GITHUB_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  client_id: ${{ secrets.ARM_CLIENT_ID }}
+  client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+  tenant_id: ${{ secrets.ARM_TENANT_ID }}
+  github_access_token: ${{ secrets.ACCESS_TOKEN }}
 
 jobs:
   setup:
