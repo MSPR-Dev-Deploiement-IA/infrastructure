@@ -64,6 +64,7 @@ jobs:
           az storage blob upload --account-name msprarosaje --account-key ${{ secrets.AZURE_STORAGE_ACCESS_KEY }} --name config.json --type block --file ./config.json --container-name config
 
   deploy:
+    needs: setup
     defaults:
       run:
         working-directory: ${{ env.TF_WORKING_DIR }}
