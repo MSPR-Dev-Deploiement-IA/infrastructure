@@ -26,11 +26,6 @@ spec:
               value: "postgres"
             - name: POSTGRES_DB
               value: "mydatabase"
-            - name: PGDATA
-              value: "/var/lib/postgresql/data/pgdata/mydata" # changed this to use a subdirectory
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgres-storage
           resources:
             requests:
               memory: "64Mi"
@@ -38,7 +33,3 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "500m"
-      volumes:
-        - name: postgres-storage
-          persistentVolumeClaim:
-            claimName: postgres-pvc

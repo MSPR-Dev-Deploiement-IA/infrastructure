@@ -16,3 +16,7 @@ spec:
             name: backend-service
             port:
               number: 80
+  tls:
+  - hosts:
+    - ${ingress_host}
+    secretName: ${ingress_host}-tls

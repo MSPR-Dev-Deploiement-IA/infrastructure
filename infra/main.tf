@@ -27,8 +27,8 @@ module "aks" {
   location                   = azurerm_resource_group.rg.location
   rg_name                    = azurerm_resource_group.rg.name
   node_pool_name             = "default"
-  node_count                 = 1
-  vm_size                    = "Standard_B2s"
+  node_count                 = 2
+  vm_size                    = "Standard_A4_v2"
   log_analytics_workspace_id = module.logs.log_workspace_id
   rbac_enabled               = true
   acr_id                     = module.acr.acr_id

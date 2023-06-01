@@ -27,6 +27,9 @@ spec:
             limits:
               cpu: 200m
               memory: 200Mi
+          volumeMounts:
+            - name: upload-volume
+              mountPath: /go/uploads
           env:
             - name: DB_HOST
               value: "postgres.default"
@@ -42,3 +45,7 @@ spec:
               value: "8080"
             - name: GIN_MODE
               value: "release"
+      volumes:
+      - name: upload-volume
+        persistentVolumeClaim:
+          claimName: backend-pvc
