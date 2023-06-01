@@ -1,12 +1,3 @@
-# CERTS
-resource "kubernetes_manifest" "cert_ressource" {
-  manifest = yamldecode(templatefile("./modules/kube/manifests/cert/ressource.yml", { fqdn = var.fqdn }))
-}
-
-resource "kubernetes_manifest" "cert_letsencrypt" {
-  manifest = yamldecode(templatefile("./modules/kube/manifests/cert/letsencrypt_prod.yml", { email = "germain.leignel@gmail.com" }))
-}
-
 # POSTGRES
 resource "kubernetes_manifest" "postgres_persistent_volume_claim" {
   manifest = yamldecode(file("./modules/kube/manifests/database/persistant_volume_claim.yml"))
