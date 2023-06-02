@@ -29,6 +29,13 @@ resource "kubernetes_manifest" "backend_ingress" {
   manifest = yamldecode(templatefile("./modules/kube/manifests/backend/ingress.yml", { ingress_host = var.fqdn }))
 }
 
+resource "kubernetes_manifest" "backend_certificate" {
+  manifest = yamldecode(templatefile("./modules/kube/manifests/backend/certificate.yml", { ingress_host = var.fqdn }))
+}
+
+resource "kubernetes_manifest" "backend_issuer" {
+  manifest = yamldecode(templatefile("./modules/kube/manifests/backend/issuer.yml", { ingress_host = var.fqdn, email = "g.leignel@groupeonepoint.com" }))
+}
 
 # FRONTEND
 # resource "kubernetes_manifest" "frontend_deployment" {

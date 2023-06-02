@@ -3,16 +3,22 @@ kind: Ingress
 metadata:
   name: backend-ingress
   namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: ci
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - ${ingress_host}
+      secretName: tls
   rules:
-  - host: ${ingress_host}
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/backend"
-        backend:
-          service:
-            name: backend-service
-            port:
-              number: 80
+    - host: ${ingress_host}
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/backend"
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 443

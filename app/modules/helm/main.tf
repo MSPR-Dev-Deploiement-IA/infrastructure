@@ -6,7 +6,7 @@ resource "helm_release" "nginx_ingress" {
   namespace  = "default"
 
   values = [
-    file("./modules/helm/values/ingress.yml")
+    file("./modules/helm/values/ingress_nginx.yml")
   ]
 
   set {
@@ -38,5 +38,16 @@ resource "helm_release" "kube-dashboard" {
 
   values = [
     file("./modules/helm/values/kube_dashboard.yml")
+  ]
+}
+
+resource "helm_release" "cert_manager" {
+  name       = "cert-manager"
+  repository = "https://charts.jetstack.io"
+  chart      = "cert-manager"
+  version    = "1.12.1"
+
+  values = [
+    file("./modules/helm/values/cert_manager.yml")
   ]
 }
