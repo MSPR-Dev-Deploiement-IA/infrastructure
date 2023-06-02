@@ -10,6 +10,18 @@ module "acr" {
   rg_name  = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
   acr_sku  = "Standard"
+
+  github_access_token = var.github_access_token
+  images = [
+    {
+      name = "frontend"
+      path = "https://github.com/MSPR-Dev-Deploiement-IA/frontend.git#main"
+    },
+    {
+      name = "backend"
+      path = "https://github.com/MSPR-Dev-Deploiement-IA/backend.git#main"
+    }
+  ]
 }
 
 module "logs" {
