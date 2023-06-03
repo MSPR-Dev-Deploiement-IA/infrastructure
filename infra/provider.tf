@@ -2,16 +2,16 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.59.0"
+      version = "3.58.0"
     }
   }
 
-  # backend "azurerm" {
-  #   resource_group_name  = "terraform_backends"
-  #   storage_account_name = "gmnbackends"
-  #   container_name       = "mspr"
-  #   key                  = "infra.terraform.tfstate"
-  # }
+  backend "azurerm" {
+    resource_group_name  = "terraform-backends"
+    storage_account_name = "gmnterraformtorage"
+    container_name       = "mspr"
+    key                  = "infra.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {

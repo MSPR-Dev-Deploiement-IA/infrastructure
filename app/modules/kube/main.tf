@@ -34,7 +34,7 @@ resource "kubernetes_manifest" "backend_certificate" {
 }
 
 resource "kubernetes_manifest" "backend_issuer" {
-  manifest = yamldecode(templatefile("./modules/kube/manifests/backend/issuer.yml", { ingress_host = var.fqdn, email = "germain.leignel@gmail.com" }))
+  manifest = yamldecode(templatefile("./modules/kube/manifests/backend/issuer.yml", { ingress_host = var.fqdn, email = "g.leignel@groupeonepoint.com" }))
 }
 
 # FRONTEND
