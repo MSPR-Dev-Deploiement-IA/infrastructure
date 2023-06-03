@@ -14,13 +14,16 @@ terraform {
   # }
 }
 
+locals {
+  infra_outputs = jsondecode(file("config.json"))
+}
+
 provider "azurerm" {
   # Configuration options$
   features {
     resource_group {
       prevent_deletion_if_contains_resources = false
     }
-
   }
 
   # client_id       = "90e09199-b541-45d0-a415-a772edf9a745"

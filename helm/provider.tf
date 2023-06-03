@@ -18,12 +18,12 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name  = "terraform-backends"
-    storage_account_name = "gmnterraformtorage"
-    container_name       = "mspr"
-    key                  = "app.terraform.tfstate"
-  }
+  # backend "azurerm" {
+  #   resource_group_name  = "terraform_backends"
+  #   storage_account_name = "gmnbackends"
+  #   container_name       = "mspr"
+  #   key                  = "app.terraform.tfstate"
+  # }
 }
 
 locals {
