@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg" {
-  name     = "msprarosaje-rg"
+  name     = "mspr"
   location = var.location
 }
 
@@ -12,22 +12,12 @@ module "acr" {
   acr_sku  = "Standard"
 
   github_access_token = var.github_access_token
-  images = [
-    {
-      name = "frontend"
-      path = "https://github.com/MSPR-Dev-Deploiement-IA/frontend.git#main"
-    },
-    {
-      name = "backend"
-      path = "https://github.com/MSPR-Dev-Deploiement-IA/backend.git#main"
-    }
-  ]
 }
 
 module "logs" {
   source = "./modules/logs"
 
-  log_workspace_name = "msprarosajelogs"
+  log_workspace_name = "msprarosajelog"
   location           = azurerm_resource_group.rg.location
   rg_name            = azurerm_resource_group.rg.name
 }
@@ -35,7 +25,7 @@ module "logs" {
 module "aks" {
   source = "./modules/aks"
 
-  aks_name                   = "msprarosajeaks"
+  aks_name                   = "mspr-arosaje"
   location                   = azurerm_resource_group.rg.location
   rg_name                    = azurerm_resource_group.rg.name
   node_pool_name             = "default"

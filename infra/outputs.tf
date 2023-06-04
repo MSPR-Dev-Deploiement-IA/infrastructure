@@ -55,3 +55,8 @@ output "acr_admin_password" {
   value     = module.acr.acr_admin_password
   sensitive = true
 }
+
+output "aks_name" {
+  value     = module.aks.aks_name
+  sensitive = true
+}

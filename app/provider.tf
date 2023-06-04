@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.58.0"
+      version = "3.59.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
@@ -17,17 +17,6 @@ terraform {
       version = "3.5.1"
     }
   }
-
-  backend "azurerm" {
-    resource_group_name  = "terraform-backends"
-    storage_account_name = "gmnterraformtorage"
-    container_name       = "mspr"
-    key                  = "app.terraform.tfstate"
-  }
-}
-
-locals {
-  infra_outputs = jsondecode(file("config.json"))
 }
 
 provider "random" {

@@ -1,16 +1,15 @@
-variable "subscription_id" {
-  sensitive = true
-}
-variable "client_secret" {
-  sensitive = true
-}
-
 variable "location" {
-  default = "westeurope"
+  default = "francecentral"
 }
 
 variable "github_access_token" {
   description = "The access token for the GitHub repository"
+  type        = string
+  sensitive   = true
+}
+
+variable "email" {
+  description = "The email address for the acme account"
   type        = string
   sensitive   = true
 }

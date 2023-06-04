@@ -45,6 +45,10 @@ spec:
               value: "8080"
             - name: GIN_MODE
               value: "release"
+            - name: DOMAIN
+              value: "https://${ingress_host}"
+            - name: TREFLE_API_KEY
+              value: k13vWbsx_GuIRt_UXEtpQSDrNT043iS2Ps5QGxdwcn8
       volumes:
       - name: upload-volume
         persistentVolumeClaim:

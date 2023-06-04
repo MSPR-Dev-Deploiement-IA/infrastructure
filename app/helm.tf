@@ -6,7 +6,7 @@ resource "helm_release" "nginx_ingress" {
   namespace  = "default"
 
   values = [
-    file("./modules/helm/values/ingress_nginx.yml")
+    file("./values/ingress_nginx.yml")
   ]
 
   set {
@@ -16,17 +16,17 @@ resource "helm_release" "nginx_ingress" {
 
   set {
     name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/azure-load-balancer-resource-group"
-    value = var.rg_name
+    value = local.infra_outputs.resource_group_name.value
   }
 
   set {
     name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/azure-load-balancer-pip-name"
-    value = var.dns_prefix
+    value = local.dns_prefix
   }
 
   set {
     name  = "controller.service.annotations.service\\.beta\\.kubernetes\\.io/azure-dns-label-name"
-    value = var.dns_prefix
+    value = local.dns_prefix
   }
 }
 
@@ -37,7 +37,7 @@ resource "helm_release" "kube-dashboard" {
   version    = "6.0.7"
 
   values = [
-    file("./modules/helm/values/kube_dashboard.yml")
+    file("./values/kube_dashboard.yml")
   ]
 }
 
@@ -48,6 +48,6 @@ resource "helm_release" "cert_manager" {
   version    = "1.12.1"
 
   values = [
-    file("./modules/helm/values/cert_manager.yml")
+    file("./values/cert_manager.yml")
   ]
 }

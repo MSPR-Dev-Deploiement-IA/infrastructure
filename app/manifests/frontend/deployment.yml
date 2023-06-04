@@ -29,4 +29,4 @@ spec:
               memory: 200Mi
           env:
             - name: PUBLIC_BACKEND
-              value: https://mspr-arosaje.westeurope.cloudapp.azure.com/backend
+              value: https://${ingress_host}/backend
