@@ -30,24 +30,22 @@ resource "helm_release" "nginx_ingress" {
   }
 }
 
-resource "helm_release" "kube-dashboard" {
-  name       = "kube-dashboard"
-  repository = "https://kubernetes.github.io/dashboard/"
-  chart      = "kubernetes-dashboard"
-  version    = "6.0.7"
 
-  values = [
-    file("./values/kube_dashboard.yml")
-  ]
+
+resource "helm_release" "kube-state-metrics" {
+  name       = "kube-state-metrics"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-state-metrics"
+  version    = "5.6.1"
 }
 
-resource "helm_release" "cert_manager" {
-  name       = "cert-manager"
-  repository = "https://charts.jetstack.io"
-  chart      = "cert-manager"
-  version    = "1.12.1"
+resource "helm_release" "kube-prometheus-stack" {
+  name       = "kube-prometheus-stack"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-prometheus-stack"
+  version    = "45.27.1"
 
   values = [
-    file("./values/cert_manager.yml")
+    "${file("./values//kube-prometheus-stack.yml")}"
   ]
 }

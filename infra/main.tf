@@ -25,11 +25,11 @@ module "logs" {
 module "aks" {
   source = "./modules/aks"
 
-  aks_name                   = "mspr-arosaje"
+  aks_name                   = "arosaje"
   location                   = azurerm_resource_group.rg.location
   rg_name                    = azurerm_resource_group.rg.name
   node_pool_name             = "default"
-  node_count                 = 2
+  node_count                 = 1
   vm_size                    = "Standard_A4_v2"
   log_analytics_workspace_id = module.logs.log_workspace_id
   rbac_enabled               = true
