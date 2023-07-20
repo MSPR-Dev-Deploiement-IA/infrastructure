@@ -1,19 +1,21 @@
 #!/bin/bash
 
-# Array of project names (folders)
-projects=("infra" "images" "certificates" "app")
+cd ./infra
+terraform init
+terraform apply -auto-approve
+terraform output -json > ./config.json
 
-# Loop through the array of projects
-for project in "${projects[@]}"; do
-  # Navigate to project directory
-  cd $project
+cd ../images
+cp ../infra/config.json .
+terraform init
+terraform apply -auto-approve || true
 
-  # Initialize terraform in the directory
-  terraform init
+cd ../certificates
+cp ../infra/config.json .
+terraform init
+terraform apply -auto-approve
 
-  # Apply terraform
-  terraform apply -auto-approve
-
-  # Navigate back to the parent directory
-  cd ..
-done
+cd ../app
+cp ../infra/config.json .
+terraform init
+terraform apply -auto-approve

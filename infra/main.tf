@@ -25,7 +25,7 @@ module "logs" {
 module "aks" {
   source = "./modules/aks"
 
-  aks_name                   = "arosaje"
+  aks_name                   = "arosajev3"
   location                   = azurerm_resource_group.rg.location
   rg_name                    = azurerm_resource_group.rg.name
   node_pool_name             = "default"
