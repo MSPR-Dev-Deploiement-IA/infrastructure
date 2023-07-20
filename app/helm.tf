@@ -31,7 +31,6 @@ resource "helm_release" "nginx_ingress" {
 }
 
 
-
 resource "helm_release" "kube-state-metrics" {
   name       = "kube-state-metrics"
   repository = "https://prometheus-community.github.io/helm-charts"

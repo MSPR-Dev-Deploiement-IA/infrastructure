@@ -23,3 +23,10 @@ spec:
           value: "user@example.com"
         - name: PGADMIN_DEFAULT_PASSWORD
           value: "supersecret"
+        volumeMounts:
+        - name: pgadmin-data
+          mountPath: /pgadmin-data
+      volumes:
+      - name: pgadmin-data
+        persistentVolumeClaim:
+          claimName: pgadmin-pvc
