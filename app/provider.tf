@@ -17,6 +17,13 @@ terraform {
       version = "3.5.1"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "terraform-backends"
+    storage_account_name = "mspr"
+    container_name       = "tfstate"
+    key                  = "app.terraform.tfstate"
+  }
 }
 
 provider "random" {

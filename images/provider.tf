@@ -5,6 +5,13 @@ terraform {
       version = "3.59.0"
     }
   }
+
+  backend "azurerm" {
+    resource_group_name  = "terraform-backends"
+    storage_account_name = "mspr"
+    container_name       = "tfstate"
+    key                  = "images.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
